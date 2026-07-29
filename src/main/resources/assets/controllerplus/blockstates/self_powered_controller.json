@@ -1,11 +1,28 @@
 {
-  "variants": {
-    "active=false": {
-      "model": "controllerplus:block/self_powered_controller"
+  "multipart": [
+    {
+      "when": {
+        "state": "offline"
+      },
+      "apply": {
+        "model": "controllerplus:block/self_powered_controller"
+      }
     },
-    "active=true": {
-      "model": "controllerplus:block/self_powered_controller_active"
+    {
+      "when": {
+        "state": "online"
+      },
+      "apply": {
+        "model": "controllerplus:block/self_powered_controller_active"
+      }
+    },
+    {
+      "when": {
+        "state": "conflicted"
+      },
+      "apply": {
+        "model": "controllerplus:block/self_powered_controller_conflicted"
+      }
     }
-  }
+  ]
 }
-

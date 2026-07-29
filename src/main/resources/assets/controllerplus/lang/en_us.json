@@ -1,5 +1,4 @@
 {
-  "block.controllerplus.self_powered_controller": "Self-Powered Controller Core",
+  "block.controllerplus.self_powered_controller": "Self-Powered ME Controller",
   "itemGroup.controllerplus": "Controller+"
 }
-

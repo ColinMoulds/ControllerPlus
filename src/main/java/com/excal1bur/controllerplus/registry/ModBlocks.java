@@ -13,6 +13,9 @@ package com.excal1bur.controllerplus.registry;
 import com.excal1bur.controllerplus.ControllerPlus;
 import com.excal1bur.controllerplus.block.SelfPoweredControllerBlock;
 
+import appeng.block.networking.ControllerBlock;
+import appeng.block.networking.ControllerBlock.ControllerBlockState;
+
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
@@ -31,6 +34,8 @@ public final class ModBlocks {
             () -> BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_BLACK)
                     .strength(6.0F, 30.0F)
+                    .lightLevel(state -> state.getValue(ControllerBlock.CONTROLLER_STATE)
+                            == ControllerBlockState.online ? 8 : 0)
                     .requiresCorrectToolForDrops());
 
     private ModBlocks() {

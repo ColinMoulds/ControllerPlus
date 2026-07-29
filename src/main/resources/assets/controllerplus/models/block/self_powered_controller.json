@@ -1,7 +1,12 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "all": "controllerplus:block/self_powered_controller"
+    "particle": "controllerplus:block/self_powered_controller_top",
+    "down": "controllerplus:block/self_powered_controller_top",
+    "up": "controllerplus:block/self_powered_controller_top",
+    "north": "controllerplus:block/self_powered_controller",
+    "east": "controllerplus:block/self_powered_controller",
+    "south": "controllerplus:block/self_powered_controller",
+    "west": "controllerplus:block/self_powered_controller"
   }
 }
-

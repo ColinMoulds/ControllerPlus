@@ -1,4 +1,3 @@
 {
-  "parent": "controllerplus:block/self_powered_controller"
+  "parent": "controllerplus:block/self_powered_controller_active"
 }
-

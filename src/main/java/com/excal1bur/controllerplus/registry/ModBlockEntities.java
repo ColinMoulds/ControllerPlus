@@ -32,9 +32,17 @@ public final class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SelfPoweredControllerBlockEntity>>
             SELF_POWERED_CONTROLLER = BLOCK_ENTITIES.register(
                     "self_powered_controller",
-                    () -> new BlockEntityType<>(
-                            SelfPoweredControllerBlockEntity::new,
-                            ModBlocks.SELF_POWERED_CONTROLLER.get()));
+                    () -> {
+                        var type = new BlockEntityType<>(
+                                SelfPoweredControllerBlockEntity::new,
+                                ModBlocks.SELF_POWERED_CONTROLLER.get());
+                        ModBlocks.SELF_POWERED_CONTROLLER.get().setBlockEntity(
+                                SelfPoweredControllerBlockEntity.class,
+                                type,
+                                null,
+                                SelfPoweredControllerBlockEntity::serverTick);
+                        return type;
+                    });
 
     private ModBlockEntities() {
     }

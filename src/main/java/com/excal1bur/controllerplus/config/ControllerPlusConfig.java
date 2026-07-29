@@ -50,12 +50,8 @@ public final class ControllerPlusConfig {
             .define("allowExternalEnergyInput", true);
 
     public static final ModConfigSpec.BooleanValue ENABLE_PARTICLES = BUILDER
-            .comment("Reserved for optional client particles. No custom particles are emitted in 0.1.0.")
+            .comment("Displays restrained spark or smoke particles around online or conflicted controllers.")
             .define("enableParticles", true);
-
-    public static final ModConfigSpec.BooleanValue ACTIVE_STATE_REQUIRES_GRID = BUILDER
-            .comment("Requires an adjacent AE2 connection before the active model is shown.")
-            .define("activeStateRequiresGrid", false);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 
@@ -67,4 +63,3 @@ public final class ControllerPlusConfig {
         ControllerPlus.LOGGER.info("Registered Controller+ server configuration");
     }
 }
-

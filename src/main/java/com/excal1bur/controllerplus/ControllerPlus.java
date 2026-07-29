@@ -40,7 +40,6 @@ public final class ControllerPlus {
         modBus.addListener(ModBlockEntities::registerCapabilities);
 
         LOGGER.info("Initialising Controller+");
-        LOGGER.info("AE2 integration mode: standalone grid-connected controller core");
+        LOGGER.info("AE2 integration mode: version-locked ME Controller subclass with channel lookup bridge");
     }
 }
-

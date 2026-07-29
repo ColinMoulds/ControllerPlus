@@ -1,0 +1,10 @@
+{
+  "parent": "controllerplus:block/self_powered_controller_lights",
+  "textures": {
+    "particle": "controllerplus:block/self_powered_controller_conflicted_top",
+    "top": "controllerplus:block/self_powered_controller_conflicted_top",
+    "side": "controllerplus:block/self_powered_controller_conflicted",
+    "top_lights": "controllerplus:block/self_powered_controller_conflicted_top_lights",
+    "side_lights": "controllerplus:block/self_powered_controller_conflicted_lights"
+  }
+}

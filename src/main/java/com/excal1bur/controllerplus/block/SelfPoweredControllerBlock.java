@@ -11,67 +11,89 @@
 package com.excal1bur.controllerplus.block;
 
 import com.excal1bur.controllerplus.blockentity.SelfPoweredControllerBlockEntity;
-import com.excal1bur.controllerplus.registry.ModBlockEntities;
-import com.mojang.serialization.MapCodec;
+import com.excal1bur.controllerplus.config.ControllerPlusConfig;
 
-import org.jetbrains.annotations.Nullable;
+import appeng.block.AEBaseEntityBlock;
+import appeng.block.networking.ControllerBlock;
+import appeng.block.networking.ControllerBlock.ControllerBlockState;
+import appeng.menu.MenuOpener;
+import appeng.menu.locator.MenuLocators;
+import appeng.menu.me.networktool.NetworkStatusMenu;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
 
 /**
- * Controller-style casing for the self-powered AE2 grid machine.
+ * A self-powered controller block backed by AE2's controller block entity
+ * contract.
+ *
+ * <p>The block deliberately uses AE2's controller-state property so the
+ * inherited controller logic can synchronize offline, online, and conflicted
+ * states without a custom renderer.
  */
-public final class SelfPoweredControllerBlock extends BaseEntityBlock {
-    public static final MapCodec<SelfPoweredControllerBlock> CODEC = simpleCodec(SelfPoweredControllerBlock::new);
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-
+public final class SelfPoweredControllerBlock extends AEBaseEntityBlock<SelfPoweredControllerBlockEntity> {
     public SelfPoweredControllerBlock(Properties properties) {
-        super(properties);
-        registerDefaultState(stateDefinition.any().setValue(ACTIVE, false));
+        super(metalProps(properties).strength(6.0F, 30.0F));
+        registerDefaultState(stateDefinition.any()
+                .setValue(ControllerBlock.CONTROLLER_STATE, ControllerBlockState.offline));
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(ControllerBlock.CONTROLLER_STATE);
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<net.minecraft.world.level.block.Block, BlockState> builder) {
-        builder.add(ACTIVE);
-    }
-
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SelfPoweredControllerBlockEntity(pos, state);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-            Level level,
+    protected InteractionResult useWithoutItem(
             BlockState state,
-            BlockEntityType<T> blockEntityType) {
-        if (!(level instanceof ServerLevel)) {
-            return null;
+            Level level,
+            BlockPos pos,
+            Player player,
+            BlockHitResult hitResult) {
+        if (level.getBlockEntity(pos) instanceof SelfPoweredControllerBlockEntity blockEntity) {
+            if (!level.isClientSide()) {
+                MenuOpener.open(NetworkStatusMenu.CONTROLLER_TYPE, player, MenuLocators.forBlockEntity(blockEntity));
+            }
+            return InteractionResult.SUCCESS;
         }
-        return createTickerHelper(
-                blockEntityType,
-                ModBlockEntities.SELF_POWERED_CONTROLLER.get(),
-                SelfPoweredControllerBlockEntity::serverTick);
+        return super.useWithoutItem(state, level, pos, player, hitResult);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        ControllerBlockState controllerState = state.getValue(ControllerBlock.CONTROLLER_STATE);
+        if (!ControllerPlusConfig.ENABLE_PARTICLES.getAsBoolean()
+                || controllerState == ControllerBlockState.offline
+                || random.nextFloat() >= 0.35F) {
+            return;
+        }
+
+        Direction face = Direction.getRandom(random);
+        double x = pos.getX() + 0.5 + face.getStepX() * 0.55 + (random.nextDouble() - 0.5) * 0.5;
+        double y = pos.getY() + 0.5 + face.getStepY() * 0.55 + (random.nextDouble() - 0.5) * 0.5;
+        double z = pos.getZ() + 0.5 + face.getStepZ() * 0.55 + (random.nextDouble() - 0.5) * 0.5;
+
+        if (controllerState == ControllerBlockState.conflicted) {
+            level.addParticle(ParticleTypes.SMOKE, x, y, z, 0, 0.015, 0);
+        } else {
+            level.addParticle(
+                    ParticleTypes.ELECTRIC_SPARK,
+                    x,
+                    y,
+                    z,
+                    face.getStepX() * 0.015,
+                    face.getStepY() * 0.015,
+                    face.getStepZ() * 0.015);
+        }
     }
 }
