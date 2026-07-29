@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "controllerplus:block/self_powered_controller"
+  }
+}
+

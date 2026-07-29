@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "ae2:engineering_processor",
+    "E": "ae2:energy_cell",
+    "F": "ae2:fluix_block",
+    "M": "ae2:controller",
+    "N": "minecraft:nether_star"
+  },
+  "pattern": [
+    "FEF",
+    "CMC",
+    "FNF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "controllerplus:self_powered_controller"
+  }
+}
+

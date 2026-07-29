@@ -1,0 +1,71 @@
+name: Bug report
+description: Report reproducible Controller+ behaviour
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: input
+    id: controllerplus
+    attributes:
+      label: Controller+ version
+    validations:
+      required: true
+  - type: input
+    id: minecraft
+    attributes:
+      label: Minecraft version
+    validations:
+      required: true
+  - type: input
+    id: neoforge
+    attributes:
+      label: NeoForge version
+    validations:
+      required: true
+  - type: input
+    id: ae2
+    attributes:
+      label: Applied Energistics 2 version
+    validations:
+      required: true
+  - type: input
+    id: java
+    attributes:
+      label: Java version
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
+  - type: textarea
+    id: latest_log
+    attributes:
+      label: Latest log
+      description: Attach the full latest.log file; remove secrets first.
+  - type: textarea
+    id: crash_report
+    attributes:
+      label: Crash report
+      description: Attach the crash report when one was generated.
+  - type: textarea
+    id: mods
+    attributes:
+      label: Mod list
+    validations:
+      required: true
+

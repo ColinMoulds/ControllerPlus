@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "controllerplus:block/self_powered_controller_active"
+  }
+}
+

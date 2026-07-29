@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "controllerplus:block/self_powered_controller"
+    },
+    "active=true": {
+      "model": "controllerplus:block/self_powered_controller_active"
+    }
+  }
+}
+
