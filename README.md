@@ -1,54 +1,53 @@
 # Controller+
 
-Controller+ is an Applied Energistics 2 add-on for Minecraft 26.1.2 that
-introduces specialised ME Controller variants.
+Controller+ is an Applied Energistics 2 add-on for Minecraft 26.1.2 that introduces specialized ME Controller variants. The current implementation focuses on a self-powered controller that can generate AE energy internally and feed it into a connected ME network.
 
-The first planned controller is the Self-Powered ME Controller, which generates
-configurable AE energy internally and supplies it to its connected ME network.
+> Add a more flexible controller layer to your AE2 setup without losing the standard controller behavior you already rely on.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Building](#building)
+- [Configuration](#configuration)
+- [Compatibility](#compatibility)
+- [Contributing](#contributing)
+- [Links](#links)
+- [License](#license)
 
 ## Overview
 
-Version 0.2.0 implements a **Self-Powered ME Controller**. It participates in
-AE2's normal controller validation and channel pathing while adding an internal
-generator and configurable energy buffer.
+Version 0.2.0 introduces a self-powered ME Controller that participates in AE2's normal controller validation and channel pathing while adding an internal generator, configurable energy buffer, and network-aware behavior.
 
 ## Features
 
-- Configurable generation, capacity, and maximum output
-- Persistent internal AE buffer
-- Real ME Controller membership and dense channel output
-- Mixed multiblocks with standard AE2 controllers
-- Optional external AE input from the connected grid
-- Offline, online, and conflicted block models
-- Animated full-bright rainbow energy paths while online
-- Online light emission and restrained state-aware particles
-- Data-driven recipe, loot table, and recipe unlock
-- Server-authoritative configuration
-- Focused unit tests for energy calculations and storage
-
-## Current status
-
-Controller+ is an early alpha intended for development and in-game validation.
-The project is version-locked to AE2 `26.1.8-alpha` because controller
-subclassing and channel lookup require implementation-level integration.
+- **Configurable generation and output** — tune how much AE the controller produces and how quickly it can deliver it.
+- **Persistent internal buffer** — store energy inside the controller for later use across your network.
+- **Proper controller integration** — participates in AE2's controller validation and dense channel behavior.
+- **Mixed multiblock support** — works alongside standard AE2 controllers in compatible structures.
+- **Optional external input** — allows the connected grid to charge the internal buffer when enabled.
+- **Visual and gameplay states** — includes offline, online, and conflicted states with matching effects and particles.
+- **Data-driven content** — recipes, loot tables, and unlocks are driven by data rather than hardcoded logic.
 
 ## Requirements
 
-- Minecraft 26.1.2
-- NeoForge 26.1.2.21-beta or a tested compatible build
-- Java 25 (64-bit)
-- Applied Energistics 2 26.1.8-alpha for Minecraft 26.1.2
-- An IDE with Java 25 support, such as IntelliJ IDEA 2025.2 or newer, a
-  Java 25-compatible Eclipse release, or VS Code with compatible Java extensions
+| Component | Version |
+|---|---|
+| Minecraft | 26.1.2 |
+| NeoForge | 26.1.2.21-beta or compatible tested build |
+| Applied Energistics 2 | 26.1.8-alpha |
+| Java | 25 (64-bit) |
 
 ## Installation
 
-1. Install the supported NeoForge version.
+1. Install a supported NeoForge version.
 2. Install a compatible Applied Energistics 2 build.
-3. Place Controller+ in the `mods` folder.
-4. Start Minecraft.
+3. Place Controller+ in your `mods` folder.
+4. Launch Minecraft and verify the controller behavior in-game.
 
-## Building from source
+## Building
 
 No global Gradle installation is required.
 
@@ -66,13 +65,11 @@ cd ControllerPlus
 .\gradlew.bat clean build
 ```
 
-Build output appears under `build/libs/`. Run data generation with
-`./gradlew runData` or `.\gradlew.bat runData`.
+Build artifacts are written to `build/libs/`. Data generation is available through `./gradlew runData` or `./gradlew.bat runData`.
 
 ## Configuration
 
-NeoForge creates `controllerplus-server.toml` in the world's `serverconfig`
-directory.
+NeoForge writes `controllerplus-server.toml` into the world's `serverconfig` directory.
 
 | Option | Default | Purpose |
 | --- | ---: | --- |
@@ -80,36 +77,31 @@ directory.
 | `generationRate` | `16` | AE generated per server tick |
 | `internalBufferCapacity` | `100000` | Maximum stored AE |
 | `maximumOutputRate` | `64` | Maximum AE supplied per server tick |
-| `generateWithoutGrid` | `true` | Charges while no adjacent grid connection exists |
-| `allowExternalEnergyInput` | `true` | Allows the AE2 grid to charge the buffer |
-| `enableParticles` | `true` | Displays online sparks and conflicted smoke |
+| `generateWithoutGrid` | `true` | Charges even without an adjacent grid connection |
+| `allowExternalEnergyInput` | `true` | Allows the connected grid to charge the buffer |
+| `enableParticles` | `true` | Enables online sparks and conflicted smoke effects |
 
-Numeric values are range-validated by NeoForge. Server configuration is
-authoritative in multiplayer. Restart after changing it.
+Server-side config values are authoritative in multiplayer and should be applied with a restart.
 
 ## Compatibility
 
-Controller+ requires the exact AE2 version listed above. Do not update AE2
-independently unless a Controller+ release explicitly supports that version.
+Controller+ is currently tied to AE2 26.1.8-alpha and should be tested carefully whenever AE2 changes. Do not update AE2 independently unless a Controller+ release explicitly supports the new version.
 
-## Known limitations
+## Known Limitations
 
-- Controller integration is tied specifically to AE2 `26.1.8-alpha`; even a
-  minor AE2 update must be retested before changing the dependency range.
-- Standard AE2 controllers do not use Controller+'s texture when calculating
-  their connected-texture render type. Mixed structures are functionally
-  validated but retain each mod's own visual casing.
+- Controller integration is tightly coupled to AE2 26.1.8-alpha.
+- Standard AE2 controllers keep their own visual casing in mixed structures.
 - AE2 26.1.8-alpha is a pre-release dependency.
-- Full channel-count/device tests, maximum-size and conflict shapes,
-  persistence across restart, particle appearance, and multiplayer behaviour
-  require manual in-game validation before release.
+- Full multiplayer, channel-count, and conflict-shape validation still requires manual in-game testing.
 
 ## Contributing
 
-Read [`CONTRIBUTING.md`](CONTRIBUTING.md), keep changes focused, and include
-build and manual test results with pull requests.
+Contributions are welcome. Please keep changes focused, and include build and manual test results with pull requests. See [CONTRIBUTING.md](CONTRIBUTING.md) for workflow details.
 
-## Licence
+## Links
 
-Controller+ code and original assets are licensed under the GNU General Public
-License v3.0 only (`GPL-3.0-only`). See [`LICENSE`](LICENSE).
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/controllerplus/)
+
+## License
+
+Controller+ code and original assets are licensed under the [GNU General Public License v3.0](LICENSE).
