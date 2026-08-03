@@ -11,6 +11,7 @@
 package com.excal1bur.controllerplus;
 
 import com.excal1bur.controllerplus.config.ControllerPlusConfig;
+import com.excal1bur.controllerplus.gametest.ModGameTests;
 import com.excal1bur.controllerplus.registry.ModBlockEntities;
 import com.excal1bur.controllerplus.registry.ModBlocks;
 import com.excal1bur.controllerplus.registry.ModCreativeTabs;
@@ -38,6 +39,7 @@ public final class ControllerPlus {
         ControllerPlusConfig.register(modContainer);
 
         modBus.addListener(ModBlockEntities::registerCapabilities);
+        modBus.addListener(ModGameTests::register);
 
         LOGGER.info("Initialising Controller+");
         LOGGER.info("AE2 integration mode: version-locked ME Controller subclass with channel lookup bridge");
