@@ -118,6 +118,13 @@ tasks.withType(AbstractArchiveTask).configureEach {
     reproducibleFileOrder = true
 }
 
+tasks.named('jar', Jar) {
+    def modId = project.mod_id
+    from(rootProject.file('LICENSE')) { rename { "${it}_${modId}" } }
+    from(rootProject.file('licenses/LICENSE-ASSETS')) { rename { "${it}_${modId}" } }
+    from(rootProject.file('licenses/NOTICE')) { rename { "${it}_${modId}" } }
+}
+
 idea {
     module {
         downloadSources = true

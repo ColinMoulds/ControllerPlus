@@ -37,3 +37,12 @@ build: configure Java 25 toolchain
 test: add buffer clamping tests
 ```
 
+Update `CHANGELOG.md` describing your change from a player's perspective.
+
+## License
+
+By contributing, you agree that your contributions will be licensed under the
+same terms as the project: [GPL-3.0](LICENSE) for code, and
+[CC BY-NC-SA 3.0](licenses/LICENSE-ASSETS) for original textures, models, and
+other visual assets (see [NOTICE](licenses/NOTICE)).
+

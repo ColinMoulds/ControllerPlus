@@ -104,4 +104,6 @@ Contributions are welcome. Please keep changes focused, and include build and ma
 
 ## License
 
-Controller+ code and original assets are licensed under the [GNU General Public License v3.0](LICENSE).
+Controller+ code is licensed under the [GNU General Public License v3.0](LICENSE).
+
+Original textures, models, and other visual assets are licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 3.0](licenses/LICENSE-ASSETS). See [NOTICE](licenses/NOTICE) for the exact scope and attribution information, including the AE2-derived controller texture template.

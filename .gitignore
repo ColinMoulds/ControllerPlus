@@ -26,3 +26,9 @@ Thumbs.db
 .env.*
 !env.example
 
+# Promo screenshots/banners aren't release assets and may depend on texture
+# licensing/provenance being resolved before publishing; keep the folder
+# tracked via .gitkeep, keep the images themselves local until ready.
+docs/promo/*
+!docs/promo/.gitkeep
+

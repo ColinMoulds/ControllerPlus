@@ -41,6 +41,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: controllerplus-build
-          path: build/libs/controllerplus-0.1.0.jar
+          path: build/libs/*.jar
           if-no-files-found: error
 

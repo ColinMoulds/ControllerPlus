@@ -1,0 +1,43 @@
+Controller+
+Copyright (c) 2026 Excal1bur
+
+LICENSE SCOPE
+
+Source code, build scripts, and data files that are primarily functional in
+nature are licensed under the GNU General Public License, version 3.0 only
+(SPDX: GPL-3.0-only). See ../LICENSE.
+
+Original textures, models, logos, previews, and other visual artwork are
+licensed under Creative Commons Attribution-NonCommercial-ShareAlike 3.0
+Unported (SPDX: CC-BY-NC-SA-3.0). See LICENSE-ASSETS.
+
+APPLIED ENERGISTICS 2
+
+Controller+ is an independent add-on for Applied Energistics 2 (AE2). AE2 is
+developed by the Applied Energistics team and is distributed under its own
+licenses. AE2 is a separate runtime dependency and is not included in the
+Controller+ JAR.
+
+The self-powered controller block textures
+(assets/controllerplus/textures/block/self_powered_controller*.png) are
+adapted from AE2's controller texture templates (controller.png,
+controller_powered.png, controller_lights.png in AE2 26.1.8-alpha). The face
+layout and connector cutouts follow AE2's original template; the surface
+colors and the animated rainbow emissive strip are original, substituted from
+vanilla Minecraft block colors. The original AE2 textures are copyright the
+Applied Energistics contributors and are licensed under CC BY-NC-SA 3.0.
+Controller+'s modified textures are distributed under the same license.
+
+No AE2 source code is copied into Controller+. See docs/AE2_INTEGRATION.md
+(kept locally, not part of version control) for the implementation-level
+integration notes.
+
+Any exact, unmodified AE2 or third-party files retained locally for
+development reference (see local-reference/) are not part of Controller+ and
+are excluded from version control.
+
+Applied Energistics 2:
+https://github.com/AppliedEnergistics/Applied-Energistics-2
+
+Creative Commons license deed:
+https://creativecommons.org/licenses/by-nc-sa/3.0/
